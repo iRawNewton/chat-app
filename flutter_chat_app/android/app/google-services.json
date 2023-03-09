@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1322209223",
+    "project_id": "kyptronixchat",
+    "storage_bucket": "kyptronixchat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1322209223:android:5dc593d86ae266b98f93e2",
+        "android_client_info": {
+          "package_name": "com.example.flutter_chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1322209223-r0g7i3rpjp7dsdshvv3fugqpsvr6q875.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDweQE0qj2boz4BPep0ne14MMtRaLmH1_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1322209223-r0g7i3rpjp7dsdshvv3fugqpsvr6q875.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
