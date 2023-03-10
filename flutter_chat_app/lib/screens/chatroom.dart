@@ -19,12 +19,12 @@ class ChatRoom extends StatelessWidget {
         'message': _message.text,
         'time': FieldValue.serverTimestamp(),
       };
+      _message.clear();
       await _firestore
           .collection('chatroom')
           .doc(chatRoomId)
           .collection('chats')
           .add(messages);
-      _message.clear();
     } else {
       debugPrint('enter some text');
     }
@@ -48,15 +48,19 @@ class ChatRoom extends StatelessWidget {
                       .collection('chatroom')
                       .doc(chatRoomId)
                       .collection('chats')
-                      .orderBy('time', descending: false)
+                      .orderBy('time', descending: true)
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.data != null) {
                       return ListView.builder(
+                          reverse: true,
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (context, index) {
-                            return Text(snapshot.data!.docs[index]['message']);
+                            Map<String, dynamic> map =
+                                snapshot.data!.docs[index].data()
+                                    as Map<String, dynamic>;
+                            return messages(size, map);
                           });
                     } else {
                       return Container();
@@ -95,6 +99,29 @@ class ChatRoom extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget messages(Size size, Map<String, dynamic> map) {
+    return Container(
+      width: size.width,
+      alignment: map['sendby'] == _auth.currentUser?.displayName
+          ? Alignment.centerRight
+          : Alignment.centerLeft,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 14),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15), color: Colors.blue),
+        child: Text(
+          map['message'],
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
         ),
       ),
     );
